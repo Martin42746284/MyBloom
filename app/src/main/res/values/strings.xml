@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Bloom</string>
+    <string name="web_client_id">123456789-abcdef.apps.googleusercontent.com</string>
+</resources>
