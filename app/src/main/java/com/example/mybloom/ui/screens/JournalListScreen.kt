@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -26,6 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
+import com.example.mybloom.R
+import com.example.mybloom.config.ThemeManager
 import com.example.mybloom.entities.DiscoveryEntity
 import com.example.mybloom.ui.theme.PlantdiscoveryTheme
 import com.example.mybloom.viewmodel.JournalViewModel
@@ -34,17 +38,14 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Écran Journal affichant toutes les découvertes de plantes
- * Intègre la liste des plantes identifiées par Gemini AI
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun JournalListScreen(
     viewModel: JournalViewModel,
     onAddClick: () -> Unit,
     onCardClick: (Int) -> Unit,
-    onSignOut: () -> Unit
+    onSignOut: () -> Unit,
+    onThemeChange: (String) -> Unit = {} // Callback pour changer le thème
 ) {
     val discoveries by viewModel.discoveries.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
@@ -73,12 +74,12 @@ fun JournalListScreen(
                     } else {
                         Column {
                             Text(
-                                "My Garden",
+                                stringResource(R.string.my_garden),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                "${discoveries.size} plants discovered",
+                                stringResource(R.string.plants_discovered, discoveries.size),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -91,7 +92,7 @@ fun JournalListScreen(
                         IconButton(onClick = { showSearchBar = true }) {
                             Icon(
                                 imageVector = Icons.Default.Search,
-                                contentDescription = "Search",
+                                contentDescription = stringResource(R.string.search),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -102,7 +103,7 @@ fun JournalListScreen(
                         IconButton(onClick = { showMenu = !showMenu }) {
                             Icon(
                                 imageVector = Icons.Default.AccountCircle,
-                                contentDescription = "Profile",
+                                contentDescription = stringResource(R.string.profile),
                                 modifier = Modifier.size(32.dp),
                                 tint = MaterialTheme.colorScheme.primary
                             )
@@ -112,6 +113,7 @@ fun JournalListScreen(
                             expanded = showMenu,
                             onDismissRequest = { showMenu = false }
                         ) {
+                            // User info
                             Column(
                                 modifier = Modifier
                                     .padding(16.dp)
@@ -131,6 +133,30 @@ fun JournalListScreen(
 
                             HorizontalDivider()
 
+                            // Theme selector
+                            var showThemeDialog by remember { mutableStateOf(false) }
+
+                            DropdownMenuItem(
+                                text = {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Palette,
+                                            contentDescription = "Theme"
+                                        )
+                                        Text(stringResource(R.string.theme))
+                                    }
+                                },
+                                onClick = {
+                                    showThemeDialog = true
+                                }
+                            )
+
+                            HorizontalDivider()
+
+                            // Sign out
                             DropdownMenuItem(
                                 text = {
                                     Row(
@@ -139,11 +165,11 @@ fun JournalListScreen(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.ExitToApp,
-                                            contentDescription = "Sign Out",
+                                            contentDescription = stringResource(R.string.sign_out),
                                             tint = MaterialTheme.colorScheme.error
                                         )
                                         Text(
-                                            "Sign Out",
+                                            stringResource(R.string.sign_out),
                                             color = MaterialTheme.colorScheme.error
                                         )
                                     }
@@ -153,6 +179,18 @@ fun JournalListScreen(
                                     onSignOut()
                                 }
                             )
+
+                            // Theme selection dialog
+                            if (showThemeDialog) {
+                                ThemeSelectionDialog(
+                                    onDismiss = { showThemeDialog = false },
+                                    onThemeSelected = { themeCode ->
+                                        onThemeChange(themeCode)
+                                        showThemeDialog = false
+                                        showMenu = false
+                                    }
+                                )
+                            }
                         }
                     }
                 },
@@ -169,13 +207,13 @@ fun JournalListScreen(
                 icon = {
                     Icon(
                         Icons.Default.Add,
-                        contentDescription = "Add",
+                        contentDescription = stringResource(R.string.add),
                         modifier = Modifier.size(24.dp)
                     )
                 },
                 text = {
                     Text(
-                        "Add Plant",
+                        stringResource(R.string.add_plant_button),
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleMedium
                     )
@@ -184,7 +222,6 @@ fun JournalListScreen(
         },
         floatingActionButtonPosition = FabPosition.End
     ) { padding ->
-        // Utiliser filteredDiscoveries au lieu de discoveries
         val displayList = if (searchQuery.isNotBlank()) filteredDiscoveries else discoveries
 
         AnimatedContent(
@@ -196,7 +233,6 @@ fun JournalListScreen(
             label = "content_transition"
         ) { isEmpty ->
             if (isEmpty) {
-                // Empty state
                 EmptyState(
                     modifier = Modifier
                         .fillMaxSize()
@@ -205,7 +241,6 @@ fun JournalListScreen(
                     isSearching = searchQuery.isNotBlank()
                 )
             } else {
-                // Plants list
                 LazyColumn(
                     contentPadding = PaddingValues(
                         top = padding.calculateTopPadding() + 16.dp,
@@ -229,6 +264,63 @@ fun JournalListScreen(
 }
 
 @Composable
+private fun ThemeSelectionDialog(
+    onDismiss: () -> Unit,
+    onThemeSelected: (String) -> Unit
+) {
+    val context = LocalContext.current
+    val currentTheme = remember { ThemeManager.getTheme(context) }
+    var selectedTheme by remember { mutableStateOf(currentTheme) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.choose_theme)) },
+        text = {
+            Column {
+                ThemeManager.getAvailableThemes().forEach { theme ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                selectedTheme = theme.code
+                                ThemeManager.setTheme(context, theme.code)
+                                onThemeSelected(theme.code)
+                            }
+                            .padding(vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedTheme == theme.code,
+                            onClick = {
+                                selectedTheme = theme.code
+                                ThemeManager.setTheme(context, theme.code)
+                                onThemeSelected(theme.code)
+                            }
+                        )
+                        Spacer(Modifier.width(12.dp))
+                        Icon(
+                            imageVector = theme.icon,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Spacer(Modifier.width(12.dp))
+                        Text(
+                            text = theme.displayName,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.close))
+            }
+        }
+    )
+}
+
+@Composable
 private fun SearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
@@ -238,13 +330,13 @@ private fun SearchBar(
         value = query,
         onValueChange = onQueryChange,
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text("Search plants...") },
+        placeholder = { Text(stringResource(R.string.search_placeholder)) },
         leadingIcon = {
             Icon(Icons.Default.Search, contentDescription = null)
         },
         trailingIcon = {
             IconButton(onClick = onClose) {
-                Icon(Icons.Default.Close, contentDescription = "Close")
+                Icon(Icons.Default.Close, contentDescription = stringResource(R.string.close))
             }
         },
         singleLine = true,
@@ -276,16 +368,13 @@ private fun EmptyState(
             )
             Spacer(Modifier.height(24.dp))
             Text(
-                text = if (isSearching) "No Plants Found" else "No Plants Yet",
+                text = stringResource(if (isSearching) R.string.no_plants_found else R.string.no_plants_yet),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = if (isSearching)
-                    "Try searching with different keywords"
-                else
-                    "Start your garden by adding your first plant!",
+                text = stringResource(if (isSearching) R.string.try_different_keywords else R.string.start_your_garden),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -307,13 +396,11 @@ private fun PlantCard(
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            // Image with gradient overlay
             Box(
                 modifier = Modifier
                     .width(120.dp)
                     .height(140.dp)
             ) {
-                // Charger l'image depuis le chemin local
                 val imageFile = File(discovery.localImagePath)
                 if (imageFile.exists()) {
                     Image(
@@ -323,7 +410,6 @@ private fun PlantCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
-                    // Image placeholder
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -352,7 +438,6 @@ private fun PlantCard(
                         )
                 )
 
-                // Badge "AI" pour indiquer l'identification par Gemini
                 Surface(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -373,7 +458,7 @@ private fun PlantCard(
                             tint = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            "AI",
+                            stringResource(R.string.ai_badge),
                             style = MaterialTheme.typography.labelSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -382,7 +467,6 @@ private fun PlantCard(
                 }
             }
 
-            // Content
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -428,10 +512,9 @@ private fun PlantCard(
                 }
             }
 
-            // Chevron icon
             Icon(
                 imageVector = Icons.Default.ChevronRight,
-                contentDescription = "View details",
+                contentDescription = stringResource(R.string.view_details),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp),

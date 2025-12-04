@@ -12,9 +12,13 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import com.example.mybloom.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -94,11 +98,11 @@ fun SignInScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Spa,
+                    Image(
+                        painter = painterResource(id = R.drawable.logo_mybloom),
                         contentDescription = "Logo",
-                        modifier = Modifier.size(56.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                        modifier = Modifier.size(80.dp),
+                        contentScale = ContentScale.Fit
                     )
                 }
             }

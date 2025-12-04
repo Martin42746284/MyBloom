@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bloom</string>
+    <string name="web_client_id">123456789-abcdef.apps.googleusercontent.com</string>
+
+    <!-- ========== AUTHENTICATION SCREENS ========== -->
+    <!-- Sign In Screen -->
+    <string name="sign_in_title">Salama Avy Indray</string>
+    <string name="sign_in_subtitle">Miditra mba hanohy ny ianao dia fisingerenana ny zavaboary</string>
+    <string name="email_label">Serasera Email</string>
+    <string name="password_label">Tenimiafina</string>
+    <string name="sign_in_button">Miditra</string>
+    <string name="sign_up_link">Tsy manana kaonty? Mosotra kaonty</string>
+    <string name="google_sign_in">Tohina amin\'i Google</string>
+    <string name="email_required">Ilaina ny email</string>
+    <string name="password_required">Ilaina ny tenimiafina</string>
+    <string name="email_password_required">Email sy tenimiafina dia ilaina</string>
+    <string name="hide_password">Fakana ny tenimiafina</string>
+    <string name="show_password">Asehoy ny tenimiafina</string>
+
+    <!-- Sign Up Screen -->
+    <string name="sign_up_title">Mosotra Kaonty</string>
+    <string name="sign_up_subtitle">Aidina manatokana ary manomboka ny fanangonana zavaboary</string>
+    <string name="confirm_password_label">Hamafico ny tenimiafina</string>
+    <string name="sign_up_button">Mosotra Kaonty</string>
+    <string name="already_have_account">Manana kaonty na? Miditra</string>
+    <string name="password_strength_weak">Malemy</string>
+    <string name="password_strength_medium">Antonony</string>
+    <string name="password_strength_strong">Mahery</string>
+    <string name="password_mismatch">Tsy mifanaraka ny tenimiafina</string>
+    <string name="password_too_short">Ny tenimiafina dia tokony 6 taratasy farafaharatsiny</string>
+
+    <!-- ========== MAIN APP SCREENS ========== -->
+    <!-- Journal List Screen -->
+    <string name="journal_title">Ny Asa Fambolena</string>
+    <string name="journal_subtitle">Zavaboary %d no jerena</string>
+    <string name="no_plants_message">Tsy misy zavaboary jerena. Manomboka amin\'ny fifindrana ny zavaboary voalohany!</string>
+    <string name="search_placeholder">Mitady zavaboary...</string>
+    <string name="add_plant_button">Ampidiro ny Zavaboary</string>
+    <string name="sign_out">Miala</string>
+
+    <!-- Capture Screen -->
+    <string name="capture_title">Fantarina ny Zavaboary</string>
+    <string name="capture_from_camera">Manakiana ny Sary</string>
+    <string name="capture_from_gallery">Misafidy amin\'ny Fidziana</string>
+    <string name="analyze_plant">Manadihady ny Zavaboary</string>
+    <string name="cancel">Kanjevitra</string>
+    <string name="save">Enimpoly</string>
+    <string name="plant_name_label">Anaran\'ny Zavaboary</string>
+    <string name="plant_description_label">Famaritana</string>
+    <string name="analyzing">Manadihady...</string>
+    <string name="camera_permission_required">Ilaina ny alaozezim ny camera</string>
+    <string name="gallery_permission_required">Ilaina ny alaozezim ny fidziana</string>
+    <string name="permission_denied">Alaozezim nanafoina</string>
+
+    <!-- Detail Screen -->
+    <string name="plant_details">Famantarana ny Zavaboary</string>
+    <string name="delete_plant">Fafaho ny Zavaboary</string>
+    <string name="delete_confirmation">Fafaho ny zavaboary amin\'ny fanangonana?</string>
+    <string name="confirm">Avaraty</string>
+    <string name="plant_deleted">Zavaboary no fafaha tsara</string>
+    <string name="edit">Soa Amin\'ny</string>
+    <string name="save_changes">Enimpoly ny Fiovan\'ny</string>
+
+    <!-- ========== LANGUAGE SETTINGS ========== -->
+    <string name="language_settings">Firaisan\'ny Fiteny</string>
+    <string name="current_language">Fiteny Ankehitriny</string>
+    <string name="select_language">Misafidy ny Fiteny</string>
+    <string name="english">English</string>
+    <string name="french">Français</string>
+    <string name="malagasy">Malagasy</string>
+
+    <!-- ========== COMMON ========== -->
+    <string name="error">Hadisoana</string>
+    <string name="loading">Miantafika...</string>
+    <string name="retry">Avereno</string>
+    <string name="ok">OK</string>
+    <string name="all_fields_required">Ny saha rehetra dia ilaina</string>
+</resources>

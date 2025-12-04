@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bloom</string>
+    <string name="web_client_id">123456789-abcdef.apps.googleusercontent.com</string>
+
+    <!-- ========== AUTHENTICATION SCREENS ========== -->
+    <!-- Sign In Screen -->
+    <string name="sign_in_title">Bienvenue</string>
+    <string name="sign_in_subtitle">Connectez-vous pour continuer votre voyage botanique</string>
+    <string name="email_label">Adresse Email</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="sign_in_button">Se Connecter</string>
+    <string name="sign_up_link">Vous n\'avez pas de compte ? S\'inscrire</string>
+    <string name="google_sign_in">Continuer avec Google</string>
+    <string name="email_required">L\'email est requis</string>
+    <string name="password_required">Le mot de passe est requis</string>
+    <string name="email_password_required">L\'email et le mot de passe sont requis</string>
+    <string name="hide_password">Masquer le mot de passe</string>
+    <string name="show_password">Afficher le mot de passe</string>
+
+    <!-- Sign Up Screen -->
+    <string name="sign_up_title">Créer un Compte</string>
+    <string name="sign_up_subtitle">Rejoignez-nous et commencez votre collection de plantes</string>
+    <string name="confirm_password_label">Confirmer le mot de passe</string>
+    <string name="sign_up_button">S\'inscrire</string>
+    <string name="already_have_account">Vous avez déjà un compte ? Se Connecter</string>
+    <string name="password_strength_weak">Faible</string>
+    <string name="password_strength_medium">Moyen</string>
+    <string name="password_strength_strong">Fort</string>
+    <string name="password_mismatch">Les mots de passe ne correspondent pas</string>
+    <string name="password_too_short">Le mot de passe doit contenir au moins 6 caractères</string>
+
+    <!-- ========== MAIN APP SCREENS ========== -->
+    <!-- Journal List Screen -->
+    <string name="journal_title">Mon Jardin</string>
+    <string name="journal_subtitle">%d plantes découvertes</string>
+    <string name="no_plants_message">Aucune plante découverte. Commencez par capturer votre première plante !</string>
+    <string name="search_placeholder">Rechercher des plantes...</string>
+    <string name="add_plant_button">Ajouter une Plante</string>
+    <string name="sign_out">Se Déconnecter</string>
+
+    <!-- Capture Screen -->
+    <string name="capture_title">Identifier une Plante</string>
+    <string name="capture_from_camera">Prendre une Photo</string>
+    <string name="capture_from_gallery">Choisir depuis la Galerie</string>
+    <string name="analyze_plant">Analyser la Plante</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Enregistrer</string>
+    <string name="plant_name_label">Nom de la Plante</string>
+    <string name="plant_description_label">Description</string>
+    <string name="analyzing">Analyse en cours...</string>
+    <string name="camera_permission_required">La permission d\'accès à la caméra est requise</string>
+    <string name="gallery_permission_required">La permission d\'accès à la galerie est requise</string>
+    <string name="permission_denied">Permission refusée</string>
+
+    <!-- Detail Screen -->
+    <string name="plant_details">Détails de la Plante</string>
+    <string name="delete_plant">Supprimer la Plante</string>
+    <string name="delete_confirmation">Supprimer cette plante de votre collection ?</string>
+    <string name="confirm">Confirmer</string>
+    <string name="plant_deleted">Plante supprimée avec succès</string>
+    <string name="edit">Modifier</string>
+    <string name="save_changes">Enregistrer les modifications</string>
+
+    <!-- ========== LANGUAGE SETTINGS ========== -->
+    <string name="language_settings">Paramètres de Langue</string>
+    <string name="current_language">Langue Actuelle</string>
+    <string name="select_language">Sélectionner la Langue</string>
+    <string name="english">English</string>
+    <string name="french">Français</string>
+    <string name="malagasy">Malagasy</string>
+
+    <!-- ========== COMMON ========== -->
+    <string name="error">Erreur</string>
+    <string name="loading">Chargement...</string>
+    <string name="retry">Réessayer</string>
+    <string name="ok">OK</string>
+    <string name="all_fields_required">Tous les champs sont requis</string>
+</resources>

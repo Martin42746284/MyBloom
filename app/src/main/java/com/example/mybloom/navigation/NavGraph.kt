@@ -30,7 +30,8 @@ sealed class Screen(val route: String) {
 fun NavGraph(
     navController: NavHostController,
     repository: DiscoveryRepository,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    onThemeChange: (String) -> Unit = {} // Ajout du paramètre
 ) {
     val context = LocalContext.current
 
@@ -125,7 +126,8 @@ fun NavGraph(
                     navController.navigate(Screen.SignIn.route) {
                         popUpTo(0) { inclusive = true }
                     }
-                }
+                },
+                onThemeChange = onThemeChange // Passe le callback ici
             )
         }
 
