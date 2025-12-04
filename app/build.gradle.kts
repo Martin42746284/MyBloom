@@ -63,6 +63,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.ai)
+    implementation(libs.okhttp3)
     implementation(libs.playservices.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
