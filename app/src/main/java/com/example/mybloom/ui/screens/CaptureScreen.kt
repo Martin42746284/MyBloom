@@ -213,7 +213,7 @@ fun CaptureScreen(
                                 )
                                 Spacer(Modifier.height(16.dp))
                                 Text(
-                                    "🌿 Identifying with Gemini AI...",
+                                    "🌿 Identifying AI and Wikipedia...",
                                     color = Color.White,
                                     style = MaterialTheme.typography.titleMedium
                                 )
@@ -343,7 +343,7 @@ fun CaptureScreen(
                         )
                         Spacer(Modifier.width(12.dp))
                         Text(
-                            "Identify with Gemini AI",
+                            "Identify AI and Wikipedia",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -374,7 +374,7 @@ fun CaptureScreen(
                         )
                         Spacer(Modifier.width(12.dp))
                         Text(
-                            "Gemini AI will identify the plant and save it to your journal automatically",
+                            "AI for plant and Wikipedia will identify the plant and save it to your journal automatically",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

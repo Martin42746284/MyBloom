@@ -156,7 +156,7 @@ private fun DetailContent(
                                             "Plant: ${discovery.plantName}\n" +
                                             "AI Fact: ${discovery.aiFact}\n" +
                                             "Discovered on: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(discovery.timestamp)}\n\n" +
-                                            "Identified with Gemini AI 🤖"
+                                            "Identified with AI and Wikipedia 🤖"
                                 )
                             }
                             context.startActivity(Intent.createChooser(shareIntent, "Share via"))
@@ -254,7 +254,7 @@ private fun DetailContent(
                             )
                             Spacer(Modifier.width(4.dp))
                             Text(
-                                "Gemini AI",
+                                "AI and Wikipedia",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
